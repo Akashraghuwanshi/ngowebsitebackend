@@ -12,9 +12,23 @@ connectDB();
 const app = express();
 const Port = process.env.PORT||8080;
 
+// CORS configuration
+const allowedOrigins = ['https://ngowebsitebackend.onrender.com','http://localhost:5173','http://127.0.0.1:5173/'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
+
 
 //middleware 
-app.use(cors())
 app.use(express.json())
 // Middleware to parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
