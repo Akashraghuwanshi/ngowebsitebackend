@@ -13,7 +13,7 @@ const app = express();
 const Port = process.env.PORT||8080;
 
 // CORS configuration
-const allowedOrigins = ['https://ngowebsitebackend.onrender.com','http://localhost:5173','http://127.0.0.1:5173/'];
+const allowedOrigins = ['https://ngofrontend.netlify.app','http://localhost:5173','http://127.0.0.1:5173'];
 const corsOptions = {
     origin: function (origin, callback) {
         if (allowedOrigins.includes(origin) || !origin) {
