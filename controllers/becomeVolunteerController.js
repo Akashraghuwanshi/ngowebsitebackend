@@ -45,15 +45,16 @@ const becomeVolunteerController= async (req, res) => {
             district,
             gender,
             state,
-            image: result.url,
+            image: result.secure_url,
         });
 
         // Save to database
         await newVolunteer.save();
 
-        res.status(201).send(newVolunteer);
+        res.status(201).json(newVolunteer);
     } catch (error) {
-        res.status(500).send({ error: error.message });
+      console.error(error); // Log error for debugging
+        res.status(500).json({ error: error.message });
     }
 };
 
@@ -65,6 +66,7 @@ const getNewVolunteers = async (req, res) => {
       res.status(200).json(newvolunteers);
     } catch (error) {
       errorHandler(error);
+      res.status(500).json({ error: error.message });
     }
   };
 
